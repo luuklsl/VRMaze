@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Direction.cpp" />
+    <ClCompile Include="src\Grid.cpp" />
+    <ClCompile Include="src\GridMazeGenerator.cpp" />
+    <ClCompile Include="src\GridElement.cpp" />
+    <ClCompile Include="src\GridAStarSearch.cpp" />
+    <ClCompile Include="src\GridGreedySearch.cpp" />
+    <ClCompile Include="src\GridDepthFirstSearch.cpp" />
+    <ClCompile Include="src\GridBreadthFirstSearch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Grid.hpp" />
+    <ClInclude Include="src\constants.h" />
+    <ClInclude Include="src\Direction.hpp" />
+    <ClInclude Include="src\GridElement.hpp" />
+    <ClInclude Include="src\PriorityQueue.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
