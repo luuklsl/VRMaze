@@ -68,7 +68,29 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
+	switch (key) {
+	case 32:
+		cam.boom(10);
+		break;
+	case 'z':
+		cam.boom(-10);
+		break;
+	case 'w':
+		cam.dolly(-10);
+		break;
+	case 's':
+		cam.dolly(10);
+		break;
+	case 'a':
+		//cam.pan(-10);
+		cam.truck(-10);
+		break;
+	case 'd':
+		//cam.pan(+10);
+		cam.truck(10);
+		break;
+	}
+	std::cout << cam.getLookAtDir();
 }
 
 //--------------------------------------------------------------
@@ -102,7 +124,7 @@ void ofApp::keyReleased(int key) {
 		grid.partialReset();
 		grid.greedySearch();
 		break;
-	case 's':
+	case 'r':
 		grid.partialReset();
 		grid.aStarSearch();
 		break;

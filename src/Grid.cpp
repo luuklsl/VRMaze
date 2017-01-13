@@ -17,20 +17,21 @@
 
 Grid::Grid() {
 	// set positions and neighbours of all elements
-	for (int y = 0; y < GRID_SIZE; y++) {
-		for (int x = 0; x < GRID_SIZE; x++) {
+	for (int x = 0; x < GRID_SIZE; x++) {
+		for (int y = 0; y < GRID_SIZE; y++) {
 			for (int z = 0; z < GRID_SIZE; z++)
 			{
-				grid[x][y][z].z = z;
+				
 				grid[x][y][z].x = x;
 				grid[x][y][z].y = y;
+				grid[x][y][z].z = z;
 
-				if (x > 0) grid[x][y][z].neighbours[DirectionWest] = &grid[x - 1][y][z];
-				if (x < GRID_SIZE - 1) grid[x][y][z].neighbours[DirectionEast] = &grid[x + 1][y][z];
-				if (y > 0) grid[x][y][z].neighbours[DirectionUp] = &grid[x][y - 1][z];
-				if (y < GRID_SIZE - 1) grid[x][y][z].neighbours[DirectionDown] = &grid[x][y + 1][z];
-				if (z > 0) grid[x][y][z].neighbours[DirectionNorth] = &grid[x][y][z-1];
-				if (z < GRID_SIZE - 1) grid[x][y][z].neighbours[DirectionSouth] = &grid[x][y][z + 1];
+				if (x > 0) { grid[x][y][z].neighbours[DirectionWest] = &grid[x - 1][y][z]; }
+				if (x < GRID_SIZE - 1) { grid[x][y][z].neighbours[DirectionEast] = &grid[x + 1][y][z]; }
+				if (y > 0) { grid[x][y][z].neighbours[DirectionDown] = &grid[x][y - 1][z]; }
+				if (y < GRID_SIZE - 1) { grid[x][y][z].neighbours[DirectionUp] = &grid[x][y + 1][z]; }
+				if (z > 0) { grid[x][y][z].neighbours[DirectionSouth] = &grid[x][y][z - 1]; }
+				if (z < GRID_SIZE - 1) { grid[x][y][z].neighbours[DirectionNorth] = &grid[x][y][z + 1]; }
 			}
 		}
 	}
