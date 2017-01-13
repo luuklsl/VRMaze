@@ -15,7 +15,7 @@
 #define WINDOW_WIDTH        700
 #define WINDOW_HEIGHT       700
 
-#define GRID_SIZE           3
+#define GRID_SIZE           15
 
 #define GRID_ELEMENT_WIDTH  ((float)WINDOW_HEIGHT  / GRID_SIZE)//Might be in need of Change
 #define GRID_ELEMENT_HEIGHT ((float)WINDOW_HEIGHT / GRID_SIZE)

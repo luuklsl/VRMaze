@@ -12,7 +12,7 @@
 #include "GridElement.hpp"
 #include "constants.h"
 
-#define N_WALLS_TO_BE_REMOVED 27
+#define N_WALLS_TO_BE_REMOVED 3100
 
 // simple macro to compute the manhattan distance to the end
 // USAGE for a GridElement el: MANHATTAN_DISTANCE_TO_END(el)

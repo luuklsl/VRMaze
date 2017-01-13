@@ -18,7 +18,9 @@ void ofApp::setup() {
 
 
 	grid.generateMaze();
-	
+	ofNode(grid);
+	/*cam.setTarget(ofVec3f((GRID_SIZE*GRID_ELEMENT_HEIGHT / 2), (GRID_SIZE*GRID_ELEMENT_HEIGHT / 2), (GRID_SIZE*GRID_ELEMENT_HEIGHT / 2)));
+	cam.setTarget(ofNode(grid));*/
 	cam.enableMouseInput();
 }
 
@@ -69,7 +71,7 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
 	switch (key) {
-	case 32:
+	case 32: //space key
 		cam.boom(10);
 		break;
 	case 'z':
@@ -90,7 +92,7 @@ void ofApp::keyPressed(int key) {
 		cam.truck(10);
 		break;
 	}
-	std::cout << cam.getLookAtDir();
+	//std::cout << cam.getLookAtDir();
 }
 
 //--------------------------------------------------------------
@@ -147,7 +149,7 @@ void ofApp::keyReleased(int key) {
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
-
+	
 }
 
 //--------------------------------------------------------------

@@ -77,7 +77,7 @@ void GridElement::draw() {
 void GridElement::drawWall(Direction direction) {
 	ofSetColor(0);
 	
-	ofFill();
+	ofNoFill();
 	switch (direction) {
 	case DirectionSouth:
 		//ofNoFill();
