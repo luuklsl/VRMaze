@@ -3,6 +3,7 @@
 vector<ofPoint> vertices;
 vector<ofColor> colors;
 ofEasyCam cam;
+ofFpsCounter fps;
 int nTri; //The number of triangles
 int nVert; //The number of the vertices equals nTri * 3
 //--------------------------------------------------------------
@@ -12,7 +13,8 @@ void ofApp::setup() {
 	x.begin();*/
 	//x.move();
 	ofBackground(255, 255, 255);
-
+	
+	
 	// init random generator
 	std::srand((unsigned int)std::time(0));
 
@@ -27,6 +29,9 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+	std::stringstream strm;
+	strm << "fps: " << ofGetFrameRate();
+	ofSetWindowTitle(strm.str());
 
 }
 
