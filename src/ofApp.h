@@ -21,6 +21,11 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-	ofCamera x;
+	/*ofCamera x;*/
     Grid grid;
+	ofEasyCam cam;			//initialize a cam object (ofEasycam can access _most_ ofCamera and ofNode functions from the online documentation)
+	ofFpsCounter fps;		//fps counter object
+							//ofTrueTypeFont	verdana14;
+	int prevX;				//initialization of values used for continuous tracking of mousemovement for camera positioning
+	int prevY;				//these two should be able to be deleted with Oculus Implementation
 };

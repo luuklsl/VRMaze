@@ -76,37 +76,37 @@ void Grid::draw() {
 	}
 }
 
-void Grid::clearRect(int first_x, int first_y,int first_z, int width, int height, int depth) {
-	int last_x = first_x + width - 1;
-	int last_y = first_y + height - 1;
-	int last_z = first_z + depth - 1;
-
-	for (int y = first_y; y <= last_y; y++) {
-		for (int x = first_x; x <= last_x; x++) {
-			for (int z = first_z; z <= last_z; z++) {
-
-				if (x != first_x) {
-					grid[x][y][z].walls[DirectionWest] = false;
-				}
-				if (x != last_x) {
-					grid[x][y][z].walls[DirectionEast] = false;
-				}
-				if (y != first_y) {
-					grid[x][y][z].walls[DirectionUp] = false;
-				}
-				if (y != last_y) {
-					grid[x][y][z].walls[DirectionDown] = false;
-				}
-				if (z != first_z) {
-					grid[x][y][z].walls[DirectionNorth] = false;
-				}
-				if (z != last_z) {
-					grid[x][y][z].walls[DirectionSouth] = false;
-				}
-			}
-		}
-	}
-}
+//void Grid::clearRect(int first_x, int first_y,int first_z, int width, int height, int depth) {
+//	int last_x = first_x + width - 1;
+//	int last_y = first_y + height - 1;
+//	int last_z = first_z + depth - 1;
+//
+//	for (int y = first_y; y <= last_y; y++) {
+//		for (int x = first_x; x <= last_x; x++) {
+//			for (int z = first_z; z <= last_z; z++) {
+//
+//				if (x != first_x) {
+//					grid[x][y][z].walls[DirectionWest] = false;
+//				}
+//				if (x != last_x) {
+//					grid[x][y][z].walls[DirectionEast] = false;
+//				}
+//				if (y != first_y) {
+//					grid[x][y][z].walls[DirectionUp] = false;
+//				}
+//				if (y != last_y) {
+//					grid[x][y][z].walls[DirectionDown] = false;
+//				}
+//				if (z != first_z) {
+//					grid[x][y][z].walls[DirectionNorth] = false;
+//				}
+//				if (z != last_z) {
+//					grid[x][y][z].walls[DirectionSouth] = false;
+//				}
+//			}
+//		}
+//	}
+//}
 
 /*void Grid::drawArc(int x_center, int y_center, double radius, double first_alpha, double last_alpha) {
 	assert(first_alpha >= 0.0 && first_alpha <= 2 * M_PI);

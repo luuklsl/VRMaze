@@ -1,75 +1,86 @@
 #include "ofApp.h"
 
-vector<ofPoint> vertices;
-vector<ofColor> colors;
-ofEasyCam cam;
-ofFpsCounter fps;
-bool mousePressed;
-int prevX;
-int prevY;
-int nTri; //The number of triangles
-int nVert; //The number of the vertices equals nTri * 3
+//vector<ofPoint> vertices;
+//vector<ofColor> colors;
+//bool mousePressed;		//
+
+
+
+//int nTri; //The number of triangles
+//int nVert; //The number of the vertices equals nTri * 3
 //--------------------------------------------------------------
 void ofApp::setup() {
-
-	ofBackground(255, 255, 255);
-	cam.setAutoDistance(false);
-	
 	// init random generator
 	std::srand((unsigned int)std::time(0));
 
+	ofBackground(255, 255, 255);
+	ofEnableDepthTest(); //Enable z-buffering
+	cam.setAutoDistance(false);		//don't get an autodistance from object point
+	cam.setGlobalPosition((0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT)); //this point is init point for cam
+	cam.disableMouseInput(); //we use own mouse tracking code due to rotation problems
+
+	//verdana14.load("verdana.ttf", 14, true, true);
+	//verdana14.setLineHeight(18.0f);
+	//verdana14.setLetterSpacing(1.037);
+
 
 	grid.generateMaze();
-	ofEnableDepthTest(); //Enable z-buffering
-
-	cam.disableMouseInput();
-	cam.setGlobalPosition((0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT));
 }
 
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	std::stringstream strm;
+	std::stringstream strm; // every update we ''stream'' framerate
 	strm << "fps: " << ofGetFrameRate();
 	ofSetWindowTitle(strm.str());
-	//std::cout<<cam.getPosition()<<std::endl;
 
+	//insert human player and enemy player code
+
+
+	//std::cout<<cam.getPosition()<<std::endl;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+	/*string x = to_string(ofGetFrameRate());
 
-	cam.begin();
+	ofSetColor(225);
+	verdana14.drawString("Font Example - use keyboard to type", 30, 35);*/
+
+
+	cam.begin(); //<<--look into exact use of this 
+	grid.draw();
+
+	ofDrawAxis(5000);
+	cam.end();
 
 	//Negative Zpoint --> Away from player
-
+	/*
 	//grid.draw();
 	/*ofSetColor(200, 200, 200, 100);
 	ofRect(0, 0, 0, 200, 500);
 	ofSetColor(0);
-	ofLine(0, 0, 0, 200, 150, -300);*/
+	ofLine(0, 0, 0, 200, 150, -300);
 	//ofSetRectMode(OF_RECTMODE_CORNER);
 	//ofBackgroundGradient(ofColor(255), ofColor(128));
 
 	//ofPushMatrix(); //Store the coordinate system
 
-	//ofTranslate(ofGetWidth() / 2, /*ofGetHeight() / 2*/ 0, -200);
+	//ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2 0, -200);
 	//float time = ofGetElapsedTimef(); //Get time in seconds
 	//float angle = time * 10; //Compute angle. We rotate at speed 10 degrees per second
 	//ofRotate(angle, 0, 1, 0); //Rotate the coordinate system along y axis
 	//ofSphere(0,0,0,GRID_ELEMENT_HEIGHT/2);
 
-	grid.draw();
-
-	ofDrawAxis(5000);
+	
 	//for (int i = 0; i < nTri; i++) {
 	//	ofSetColor(colors[i]);
 	//	ofTriangle(vertices[i * 3],
 	//		vertices[i * 3 + 1],
 	//		vertices[i * 3 + 2]); //Draw triangle
 	//}
-	//ofPopMatrix(); //Restore the coordinate system
-	cam.end();
+	//ofPopMatrix(); //Restore the coordinate system*/
+	
 }
 
 
@@ -95,6 +106,12 @@ void ofApp::keyPressed(int key) {
 	case 'd':
 		//cam.pan(+10);
 		cam.truck(10);
+		break;
+	case 'q':
+		cam.roll(2);
+		break;
+	case 'e':
+		cam.roll(-2);
 		break;
 	}
 	//std::cout << cam.getLookAtDir();
@@ -131,7 +148,7 @@ void ofApp::keyReleased(int key) {
 		grid.partialReset();
 		grid.greedySearch();
 		break;
-	case 'e':
+	case 't': //get better key assigned <<
 		grid.partialReset();
 		grid.aStarSearch();
 		break;
@@ -150,7 +167,7 @@ void ofApp::keyReleased(int key) {
 			grid.partialReset();
 			grid.depthFirstSearch();
 			break;*/
-	case 'q':
+	case 'y':
 		ofExit();
 	}
 }
@@ -161,13 +178,13 @@ void ofApp::mousePressed(int x, int y, int button) {
 	{
 		prevX = x;
 		prevY = y;
-		std::cout << x<<" "<< y << std::endl;
+		std::cout << x << " " << y << std::endl;
 	}
-	
+
 }
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
-	
+
 }
 
 //--------------------------------------------------------------
@@ -175,8 +192,8 @@ void ofApp::mouseDragged(int x, int y, int button) {
 	//std::cout<<x<<" , " <<y<<std::endl;
 	if (button == 0)
 	{
-		cam.pan((x - prevX)/3.6);
-		cam.tilt((y - prevY)/3.6);
+		cam.pan((x - prevX) / 3.6);
+		cam.tilt((y - prevY) / 3.6);
 		prevX = x;
 		prevY = y;
 		std::cout << cam.getRoll() << std::endl;
