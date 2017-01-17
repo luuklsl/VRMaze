@@ -4,26 +4,26 @@ vector<ofPoint> vertices;
 vector<ofColor> colors;
 ofEasyCam cam;
 ofFpsCounter fps;
+bool mousePressed;
+int prevX;
+int prevY;
 int nTri; //The number of triangles
 int nVert; //The number of the vertices equals nTri * 3
 //--------------------------------------------------------------
 void ofApp::setup() {
-	/*ofEnableDepthTest();
-	ofCamera x = ofEasyCam();
-	x.begin();*/
-	//x.move();
+
 	ofBackground(255, 255, 255);
-	
+	cam.setAutoDistance(false);
 	
 	// init random generator
 	std::srand((unsigned int)std::time(0));
 
 
 	grid.generateMaze();
-	ofNode(grid);
-	/*cam.setTarget(ofVec3f((GRID_SIZE*GRID_ELEMENT_HEIGHT / 2), (GRID_SIZE*GRID_ELEMENT_HEIGHT / 2), (GRID_SIZE*GRID_ELEMENT_HEIGHT / 2)));
-	cam.setTarget(ofNode(grid));*/
-	cam.enableMouseInput();
+	ofEnableDepthTest(); //Enable z-buffering
+
+	cam.disableMouseInput();
+	cam.setGlobalPosition((0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT));
 }
 
 
@@ -32,6 +32,7 @@ void ofApp::update() {
 	std::stringstream strm;
 	strm << "fps: " << ofGetFrameRate();
 	ofSetWindowTitle(strm.str());
+	//std::cout<<cam.getPosition()<<std::endl;
 
 }
 
@@ -47,13 +48,12 @@ void ofApp::draw() {
 	ofRect(0, 0, 0, 200, 500);
 	ofSetColor(0);
 	ofLine(0, 0, 0, 200, 150, -300);*/
-	ofEnableDepthTest(); //Enable z-buffering
 	//ofSetRectMode(OF_RECTMODE_CORNER);
 	//ofBackgroundGradient(ofColor(255), ofColor(128));
 
 	//ofPushMatrix(); //Store the coordinate system
 
-	ofTranslate(ofGetWidth() / 2, /*ofGetHeight() / 2*/ 0, -200);
+	//ofTranslate(ofGetWidth() / 2, /*ofGetHeight() / 2*/ 0, -200);
 	//float time = ofGetElapsedTimef(); //Get time in seconds
 	//float angle = time * 10; //Compute angle. We rotate at speed 10 degrees per second
 	//ofRotate(angle, 0, 1, 0); //Rotate the coordinate system along y axis
@@ -131,9 +131,12 @@ void ofApp::keyReleased(int key) {
 		grid.partialReset();
 		grid.greedySearch();
 		break;
-	case 'r':
+	case 'e':
 		grid.partialReset();
 		grid.aStarSearch();
+		break;
+	case 'r':
+		grid.partialReset();
 		break;
 		/*case 't':
 			system("cls");
@@ -153,19 +156,34 @@ void ofApp::keyReleased(int key) {
 }
 
 //--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button) {
+	if (button == 0)
+	{
+		prevX = x;
+		prevY = y;
+		std::cout << x<<" "<< y << std::endl;
+	}
+	
+}
+//--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-	cam.getDrag();
+	//std::cout<<x<<" , " <<y<<std::endl;
+	if (button == 0)
+	{
+		cam.pan((x - prevX)/3.6);
+		cam.tilt((y - prevY)/3.6);
+		prevX = x;
+		prevY = y;
+		std::cout << cam.getRoll() << std::endl;
+		cam.roll(0);
+	}
 }
 
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button) {
-
-}
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button) {

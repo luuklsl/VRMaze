@@ -77,11 +77,11 @@ void GridElement::draw() {
 void GridElement::drawWall(Direction direction) {
 	ofSetColor(0);
 	
-	ofNoFill();
+	ofFill();
 	switch (direction) {
 	case DirectionSouth:
 		//ofNoFill();
-		ofSetColor(255, 0, 0, 150); //red
+		ofSetColor(255, 0, 0); //red
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x+0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y+0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -93,7 +93,7 @@ void GridElement::drawWall(Direction direction) {
 		break;
 	
 	case DirectionNorth:
-		ofSetColor(255, 0, 255, 150); //purple
+		ofSetColor(255, 0, 255); //purple
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -105,7 +105,7 @@ void GridElement::drawWall(Direction direction) {
 		break;
 
 	case DirectionEast:
-		ofSetColor(255, 255, 0, 150); //yellow
+		ofSetColor(255, 255, 0); //yellow
 		//ofDrawLine((x + 1) * GRID_ELEMENT_WIDTH, y * GRID_ELEMENT_HEIGHT, z*GRID_ELEMENT_HEIGHT,(x + 1) * GRID_ELEMENT_WIDTH, (y + 1) * GRID_ELEMENT_HEIGHT, z *GRID_ELEMENT_HEIGHT);
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x +1) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
@@ -117,7 +117,7 @@ void GridElement::drawWall(Direction direction) {
 		);
 		break;	
 	case DirectionWest:
-		ofSetColor(0, 0, 255, 150); //white
+		ofSetColor(0, 0, 255); //white
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -129,7 +129,7 @@ void GridElement::drawWall(Direction direction) {
 		break;
 
 	case DirectionUp:
-		ofSetColor(0, 0, 0, 150); //black
+		ofSetColor(0, 0, 0); //black
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 1) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -139,7 +139,7 @@ void GridElement::drawWall(Direction direction) {
 			float(GRID_ELEMENT_HEIGHT));
 		break;
 	case DirectionDown:
-		ofSetColor(255, 200, 200, 150); //pink
+		ofSetColor(255, 200, 200); //pink
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y) *GRID_ELEMENT_HEIGHT), //this is for all the directions
