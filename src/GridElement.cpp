@@ -81,7 +81,7 @@ void GridElement::drawWall(Direction direction) {
 	switch (direction) {
 	case DirectionSouth:
 		//ofNoFill();
-		ofSetColor(255, 0, 0); //red
+		ofSetColor(255, 0, 0); //red		
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x+0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y+0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
