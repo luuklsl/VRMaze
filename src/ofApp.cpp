@@ -15,9 +15,9 @@ void ofApp::setup() {
 
 	ofBackground(255, 255, 255);
 	ofEnableDepthTest(); //Enable z-buffering
-	cam.setAutoDistance(false);		//don't get an autodistance from object point
+	//cam.setAutoDistance(false);		//don't get an autodistance from object point
 	cam.setGlobalPosition((0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT), (0.5 * GRID_ELEMENT_HEIGHT)); //this point is init point for cam
-	cam.disableMouseInput(); //we use own mouse tracking code due to rotation problems
+//	cam.disableMouseInput(); //we use own mouse tracking code due to rotation problems
 
 	//verdana14.load("verdana.ttf", 14, true, true);
 	//verdana14.setLineHeight(18.0f);
