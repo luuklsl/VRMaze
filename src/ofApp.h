@@ -31,7 +31,7 @@ public:
 	ofImage floor;
 	ofImage roof;
 	Grid grid;
-	ofEasyCam cam;			//initialize a cam object (ofEasycam can access _most_ ofCamera and ofNode functions from the online documentation)
+	ofCamera cam;			//initialize a cam object (ofEasycam can access _most_ ofCamera and ofNode functions from the online documentation)
 	ofFpsCounter fps;		//fps counter object
 							//ofTrueTypeFont	verdana14;
 	int prevX;				//initialization of values used for continuous tracking of mousemovement for camera positioning

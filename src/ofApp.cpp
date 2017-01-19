@@ -18,9 +18,11 @@ void ofApp::setup(){
 		ofRectangle bounds = cv1.getHMDSize();
 		ofSetWindowShape(bounds.width, bounds.height);
 	}
+	
+	cam.setPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 	wall1.loadImage("wall.bmp");
 	//wall1.getTextureReference().bind();
-
+	cv1.setPosition(GRID_SIZE*GRID_ELEMENT_HEIGHT, GRID_SIZE*GRID_ELEMENT_HEIGHT, GRID_SIZE*GRID_ELEMENT_HEIGHT);
 
 	std::srand((unsigned int)std::time(0));
 	ofSetVerticalSync(false);
@@ -62,8 +64,9 @@ void ofApp::draw(){
 
 //----------------------------------------------------------
 void ofApp::drawScene() {
+	cam.begin(); //<<--look into exact use of this 
 
-	/*ofSeedRandom(666);
+	ofSeedRandom(666);
 
 	for (int i = 0; i<100; i++) {
 
@@ -83,12 +86,12 @@ void ofApp::drawScene() {
 		ofTranslate(pos);
 		ofDrawBox(0.5);
 		ofPopMatrix();
-	}*/
-	//cam.begin(); //<<--look into exact use of this 
+	}
 	grid.draw();
 
 	ofDrawAxis(5000);
-	//cam.end();
+	
+	cam.end();
 }
 
 //--------------------------------------------------------------
@@ -130,18 +133,6 @@ void ofApp::keyReleased(int key){
 		grid.reset();
 		grid.generateMaze();
 		break;
-		/*case 'r':
-		grid.reset();
-		grid.generateRooms();
-		break;
-		case 'o':
-		grid.reset();
-		grid.generateObstacles();
-		break;
-		case 'j':
-		grid.reset();
-		grid.generateJail();
-		break;`*/
 	case 'f':
 		grid.partialReset();
 		grid.depthFirstSearch();
@@ -161,18 +152,6 @@ void ofApp::keyReleased(int key){
 	case 'r':
 		grid.partialReset();
 		break;
-		/*case 't':
-		system("cls");
-		std::cout << "Search	|	Visited	|  Path length	|	PL/V"<<std::endl;
-		grid.partialReset();
-		grid.aStarSearch();
-		grid.partialReset();
-		grid.greedySearch();
-		grid.partialReset();
-		grid.breadthFirstSearch();
-		grid.partialReset();
-		grid.depthFirstSearch();
-		break;*/
 	case 'y':
 		ofExit();
 	}
@@ -191,8 +170,8 @@ void ofApp::mouseDragged(int x, int y, int button){
 		cam.tilt((y - prevY) / 3.6);
 		prevX = x;
 		prevY = y;
-		std::cout << cam.getRoll() << std::endl;
-		cam.roll(0);
+		//std::cout << cam.getRoll() << std::endl;
+		//cam.roll(0);
 	}
 }
 
