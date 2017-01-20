@@ -21,7 +21,7 @@ Grid::Grid() {
 		for (int y = 0; y < GRID_SIZE; y++) {
 			for (int z = 0; z < GRID_SIZE; z++)
 			{
-				
+
 				grid[x][y][z].x = x;
 				grid[x][y][z].y = y;
 				grid[x][y][z].z = z;
@@ -44,8 +44,8 @@ void Grid::reset() {
 	for (int y = 0; y < GRID_SIZE; y++) {
 		for (int x = 0; x < GRID_SIZE; x++) {
 			for (int z = 0; z < GRID_SIZE; z++) {
-			grid[x][y][z].reset();
-		}
+				grid[x][y][z].reset();
+			}
 		}
 	}
 }
@@ -74,6 +74,31 @@ void Grid::draw() {
 			}
 		}
 	}
+}
+
+void Grid::gridEnemy() {
+	GridElement* e = (GridElement*)grid;
+	GridElement* current_element;
+	for (int x = 0; x < GRID_SIZE*GRID_SIZE*GRID_SIZE; x++) {
+		{
+			if (e->x == 2 && e->y == 2 && e->z == 2)
+			{
+				e->astar = true;
+			}
+			if (e->astar)
+			{
+				current_element = e;
+				break;
+			}
+			e++;	// Advance the pointer by one
+		}
+	}
+
+
+	if (!current_element) {
+		current_element = &grid[0][0][0];		//this is how we have to give the elem to queue due to mandist.
+	}
+
 }
 
 //void Grid::clearRect(int first_x, int first_y,int first_z, int width, int height, int depth) {

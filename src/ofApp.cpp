@@ -146,7 +146,7 @@ void ofApp::keyReleased(int key){
 			maze = grid.aStarCheck();
 		}
 		break;
-	case 'f':
+	/*case 'f':
 		grid.partialReset();
 		grid.depthFirstSearch();
 		break;
@@ -157,10 +157,11 @@ void ofApp::keyReleased(int key){
 	case 'g':
 		grid.partialReset();
 		grid.greedySearch();
-		break;
+		break;*/
+
 	case 't': //get better key assigned <<
 		grid.partialReset();
-		grid.aStarSearch();
+		grid.gridEnemy();
 		break;
 	case 'r':
 		grid.partialReset();

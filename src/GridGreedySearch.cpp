@@ -53,7 +53,6 @@ void Grid::greedySearch() {
 		}
 
 		//int n_unvisited_directions = 0;	//does this even do what I want?
-		Direction unvisited_directions[N_DIRECTIONS]; //setup an array of possible directions
 
 		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
 			//for a queue we want to push all the elements that are on the 'frontier'

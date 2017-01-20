@@ -26,13 +26,18 @@ public:
 
 	void draw();
 	void generateMaze();
+	
+	bool aStarCheck();
+	
+	void gridEnemy();
+
+	GridElement grid[GRID_SIZE][GRID_SIZE][GRID_SIZE];
+
+private:
 	void depthFirstSearch();
 	void breadthFirstSearch();
 	void greedySearch();
 	void aStarSearch();
-	bool aStarCheck();
-
-	GridElement grid[GRID_SIZE][GRID_SIZE][GRID_SIZE];
 };
 
 #endif /* Grid_hpp */
