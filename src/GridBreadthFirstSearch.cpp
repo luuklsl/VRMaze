@@ -13,9 +13,12 @@
 #include <iostream>
 #include <queue>
 
-void Grid::breadthFirstSearch() {
+void Grid::breadthFirstSearch(GridElement * bfs_elem, GridElement * human_elem) {
 	std::queue<GridElement *> queue; //create a queue called 'queue' that will contain Gridelement pointers
-	queue.push(&grid[0][0][0]);//current start
+	if (bfs_elem == NULL) {
+		queue.push(&grid[0][0][0]);
+	}
+	else { queue.push(bfs_elem); }
 	queue.front()->length_of_path = 0;
 	int n_visited = 1;
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
@@ -24,7 +27,7 @@ void Grid::breadthFirstSearch() {
 		int x = current_element->x;						//try to get x and y values (not yet working correctly)
 		int y = current_element->y;
 		int z = current_element->z;
-		if (x == (GRID_SIZE - 1) && y == (GRID_SIZE - 1) && z ==(GRID_SIZE-1))
+		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
 		{
 			//add all possible frontiers to queue
 			std::cout << "BFS	|	" << n_visited << "	|	" << current_element->length_of_path+1 << "	|	" << 

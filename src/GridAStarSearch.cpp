@@ -25,14 +25,18 @@ public:
 };
 
 
-void Grid::aStarSearch() {
+void Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
+{
+
 	// priority queue which sorts elements based on its score (score is a member of GridElement)
 	// for a star search, the score partially consists of the length of the path from the start to the current_element element
 	// for this purpose, GridElement has a member length_of_path, whose calculation is left to the user
 	PriorityQueue<GridElement *, FScoreCompare> queue;
-	GridElement* e = (GridElement*)grid;
-	GridElement* current_element = &grid[0][0][0];
-	queue.push(current_element);//current_element start
+
+	if (astar_elem == NULL) {
+		GridElement* astar_elem = &grid[0][0][0];
+	}
+	queue.push(astar_elem);//current_element start
 	int n_visited = 0;
 	queue.top()->length_of_path = 0;
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
@@ -45,7 +49,7 @@ void Grid::aStarSearch() {
 		int x = current_element->x;						//try to get x and y values 
 		int y = current_element->y;
 		int z = current_element->z;
-		if (x == (GRID_SIZE - 1) && y == (GRID_SIZE - 1) && z == (GRID_SIZE - 1))
+		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
 		{
 			std::cout << "A*	|	" << n_visited << "	|	" << current_element->length_of_path + 1 << "	|	" <<
 				((current_element->length_of_path + 1) / (double)n_visited) << std::endl;// << z << std::endl;

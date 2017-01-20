@@ -147,16 +147,16 @@ void ofApp::keyReleased(int key){
 		}
 		break;
 	/*case 'f':
-		grid.partialReset();
-		grid.depthFirstSearch();
+		grid.partialreset();
+		grid.depthfirstsearch();
 		break;
 	case 'b':
-		grid.partialReset();
-		grid.breadthFirstSearch();
+		grid.partialreset();
+		grid.breadthfirstsearch();
 		break;
 	case 'g':
-		grid.partialReset();
-		grid.greedySearch();
+		grid.partialreset();
+		grid.greedysearch();
 		break;*/
 
 	case 't': //get better key assigned <<

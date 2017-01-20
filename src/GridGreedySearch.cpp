@@ -22,12 +22,14 @@ public:
 	}
 };
 
-void Grid::greedySearch() {
+void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 	// priority queue which sorts elements based on its score (score is a member of GridElement)
 	// for greedy search, this score could be the manhattan distance (from the current element) to the end
 	PriorityQueue<GridElement *, DistanceCompare> queue; //creates a queue that already uses distancecompare
-	GridElement* element = &grid[0][0][0];		//this is how we have to give the elem to queue due to mandist.
-	queue.push(element);//current start
+	if (greedy_elem == NULL) {
+		GridElement* greedy_elem = &grid[0][0][0];
+	}		//this is how we have to give the elem to queue due to mandist.
+	queue.push(greedy_elem);//current start
 	int n_visited = 0; //set in visited
 	queue.top()->length_of_path = 0;
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
@@ -38,7 +40,7 @@ void Grid::greedySearch() {
 		int x = current_element->x;						//try to get x and y values 
 		int y = current_element->y;
 		int z = current_element->z;
-		if (x == (GRID_SIZE - 1) && y == (GRID_SIZE - 1) && z ==(GRID_SIZE-1))
+		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
 		{
 			//add element with shortes Manhattan distance
 			std::cout << "Greedy	|	" << n_visited << "	|	" << current_element->length_of_path+1 << "	|	" <<

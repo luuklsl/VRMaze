@@ -14,10 +14,16 @@
 
 #include "Grid.hpp"
 
-void Grid::depthFirstSearch() {
+void Grid::depthFirstSearch(GridElement * dfs_elem, GridElement * human_elem) {
 	std::stack<GridElement *> stack;
 	//create a stack called 'stack' that will contain Gridelement pointers
-	stack.push(&grid[0][0][0]);//current start
+	if (dfs_elem == NULL) {
+		stack.push(&grid[0][0][0]);
+	}
+	else
+	{
+		stack.push(dfs_elem);
+	}
 	int n_visited = 1;
 	while (!stack.empty()) {							//if stack is empty we haven't started yet (catch finish case)
 		GridElement *current_element = stack.top();		//we get the current elem ([0][0]
@@ -26,12 +32,12 @@ void Grid::depthFirstSearch() {
 		int x = current_element->x;						//try to get x and y values (not yet working correctly)
 		int y = current_element->y;
 		int z = current_element->z;
-		if (x == (GRID_SIZE - 1) && y == (GRID_SIZE - 1) && z == (GRID_SIZE - 1))
+		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
 		{
 			//add o
 			//int z = stack.size();
-			std::cout << "DFS	|	" << n_visited << "	|	" << z << "	|	" << (z / (double)n_visited) << std::endl;
-			while (!stack.empty())
+			if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
+				while (!stack.empty())
 			{
 				stack.top()->marked = true;
 				stack.pop();

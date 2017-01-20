@@ -78,28 +78,50 @@ void Grid::draw() {
 
 void Grid::gridEnemy() {
 	GridElement* e = (GridElement*)grid;
-	GridElement* current_element;
+	int human_visted = 0;
 	for (int x = 0; x < GRID_SIZE*GRID_SIZE*GRID_SIZE; x++) {
-		{
-			if (e->x == 2 && e->y == 2 && e->z == 2)
+		
+			if (e->x == 2 && e->y == 2 && e->z == 2) //set this place to true for debugging purposes
 			{
-				e->astar = true;
+				e->bfs = true;
 			}
+
 			if (e->astar)
 			{
-				current_element = e;
-				break;
+				astar_elem = e;
+
+			}
+			if (e->greedy)
+			{
+				greedy_elem = e;
+
+			}if (e->dfs)
+			{
+				dfs_elem = e;
+
+			}if (e->bfs)
+			{
+				bfs_elem = e;
+			}
+			if (e->human)
+			{
+				human_elem = e;
+			}
+			if (e->visited_human)
+			{
+				human_visted++;
 			}
 			e++;	// Advance the pointer by one
 		}
+	if (human_elem == NULL)
+	{
+		human_elem = &grid[0][0][0];
+	}
+		breadthFirstSearch(bfs_elem,human_elem);
+	
 	}
 
 
-	if (!current_element) {
-		current_element = &grid[0][0][0];		//this is how we have to give the elem to queue due to mandist.
-	}
-
-}
 
 //void Grid::clearRect(int first_x, int first_y,int first_z, int width, int height, int depth) {
 //	int last_x = first_x + width - 1;
