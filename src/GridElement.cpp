@@ -46,12 +46,12 @@ void GridElement::partialReset() { //this makes that you can run multiple search
 
 void GridElement::draw() {
 	// draw background if visited
-	if (visited) {
-		ofSetColor(145, 187, 255);
-		ofFill();
-		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
-		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.5)*GRID_ELEMENT_HEIGHT, (z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.33));
-	}
+	//if (visited) {
+	//	ofSetColor(145, 187, 255);
+	//	ofFill();
+	//	//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
+	//	ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.5)*GRID_ELEMENT_HEIGHT, (z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.33));
+	//}
 
 
 	// draw circle if marked
@@ -88,7 +88,7 @@ void GridElement::drawWall(Direction direction) {
 			float((z) *GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
 			float(GRID_ELEMENT_HEIGHT),
-			float(10)
+			float(0)
 		);
 		break;
 	
@@ -100,7 +100,7 @@ void GridElement::drawWall(Direction direction) {
 			float((z + 1) *GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
 			float(GRID_ELEMENT_HEIGHT),
-			float(10)
+			float(0)
 		);
 		break;
 
@@ -111,7 +111,7 @@ void GridElement::drawWall(Direction direction) {
 			float((x +1) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float((z + 0.5) *GRID_ELEMENT_HEIGHT), //
-			float(10),
+			float(0),
 			float(GRID_ELEMENT_HEIGHT),
 			float(GRID_ELEMENT_HEIGHT)
 		);
@@ -122,7 +122,7 @@ void GridElement::drawWall(Direction direction) {
 			float((x) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float((z + 0.5) *GRID_ELEMENT_HEIGHT), //
-			float(10),
+			float(0),
 			float(GRID_ELEMENT_HEIGHT),
 			float(GRID_ELEMENT_HEIGHT)
 		); 
@@ -135,7 +135,7 @@ void GridElement::drawWall(Direction direction) {
 			float((y + 1) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float((z + 0.5) *GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
-			float(30),
+			float(0),
 			float(GRID_ELEMENT_HEIGHT));
 		break;
 	case DirectionDown:
@@ -145,7 +145,7 @@ void GridElement::drawWall(Direction direction) {
 			float((y) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float((z + 0.5) *GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
-			float(10),
+			float(0),
 			float(GRID_ELEMENT_HEIGHT));
 		break;
 	}

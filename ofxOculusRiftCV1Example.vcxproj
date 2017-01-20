@@ -171,6 +171,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aStartCheck.cpp" />
     <ClCompile Include="src\Direction.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\GridAStarSearch.cpp" />

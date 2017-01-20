@@ -12,7 +12,7 @@
 #include "GridElement.hpp"
 #include "constants.h"
 
-#define N_WALLS_TO_BE_REMOVED 251
+#define N_WALLS_TO_BE_REMOVED 170
 
 // simple macro to compute the manhattan distance to the end
 // USAGE for a GridElement el: MANHATTAN_DISTANCE_TO_END(el)
@@ -25,19 +25,12 @@ public:
 	void partialReset();
 
 	void draw();
-
-	void clearRect(int, int, int, int, int, int);
-//	void drawArc(int, int, double, double, double);
-
 	void generateMaze();
-//	void generateRooms();
-//	void generateObstacles();
-//	void generateJail();
-
 	void depthFirstSearch();
 	void breadthFirstSearch();
 	void greedySearch();
 	void aStarSearch();
+	bool aStarCheck();
 
 	GridElement grid[GRID_SIZE][GRID_SIZE][GRID_SIZE];
 };

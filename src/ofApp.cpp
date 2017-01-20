@@ -22,13 +22,20 @@ void ofApp::setup(){
 	cam.setPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 	wall1.loadImage("wall.bmp");
 	//wall1.getTextureReference().bind();
-	cv1.setPosition(GRID_SIZE*GRID_ELEMENT_HEIGHT, GRID_SIZE*GRID_ELEMENT_HEIGHT, GRID_SIZE*GRID_ELEMENT_HEIGHT);
+	cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 
 	std::srand((unsigned int)std::time(0));
 	ofSetVerticalSync(false);
 	ofBackground(255, 255, 255);
 	ofEnableDepthTest(); //Enable z-buffering
+	maze = true;
+	while (maze)
+	{
+		grid.reset();
 	grid.generateMaze();
+	maze = grid.aStarCheck();
+	}
+	
 }
 
 //--------------------------------------------------------------
@@ -64,9 +71,9 @@ void ofApp::draw(){
 
 //----------------------------------------------------------
 void ofApp::drawScene() {
-	cam.begin(); //<<--look into exact use of this 
+	//cam.begin(); //<<--look into exact use of this 
 
-	ofSeedRandom(666);
+	/*ofSeedRandom(666);
 
 	for (int i = 0; i<100; i++) {
 
@@ -86,12 +93,13 @@ void ofApp::drawScene() {
 		ofTranslate(pos);
 		ofDrawBox(0.5);
 		ofPopMatrix();
-	}
+	}*/
+	ofTranslate(/*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2, /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/0, /*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2);
 	grid.draw();
 
 	ofDrawAxis(5000);
 	
-	cam.end();
+	//cam.end();
 }
 
 //--------------------------------------------------------------
@@ -130,8 +138,13 @@ void ofApp::keyPressed(int key){
 void ofApp::keyReleased(int key){
 	switch (key) {
 	case 'm':
-		grid.reset();
-		grid.generateMaze();
+		maze = true;
+		while (maze)
+		{
+			grid.reset();
+			grid.generateMaze();
+			maze = grid.aStarCheck();
+		}
 		break;
 	case 'f':
 		grid.partialReset();

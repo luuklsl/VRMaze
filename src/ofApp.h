@@ -36,4 +36,6 @@ public:
 							//ofTrueTypeFont	verdana14;
 	int prevX;				//initialization of values used for continuous tracking of mousemovement for camera positioning
 	int prevY;				//these two should be able to be deleted with Oculus Implementation
+	
+	bool maze;
 };

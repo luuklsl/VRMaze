@@ -30,14 +30,21 @@ public:
 
 	// variables for maze generation and path finding
 	bool visited;
-	
-	bool marked;
-	
+	bool marked; //both marked and visited and finally checked --> partialReset();
 	bool finally_checked;
-
 	GridElement *parent;
 	int length_of_path;
 	int score;
+
+	//some new vars for drawing and tracking of enemies and Human Player
+	bool visited_human;
+	
+	//all flags underneat here: ONLY ONE AT MOST
+	bool astar;
+	bool greedy;
+	bool bfs;
+	bool dfs;
+	bool human;
 };
 
 #endif /* GridElement_hpp */
