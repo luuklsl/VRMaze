@@ -33,6 +33,12 @@ void GridElement::reset() {
 	parent = NULL;
 	length_of_path = -1;
 	score = 0;
+	bfs = false;
+	dfs = false;
+	astar = false;
+	greedy = false;
+	human = false;
+	visited_human = false;
 }
 
 void GridElement::partialReset() { //this makes that you can run multiple searches on the same maze (better for 3D vizualisation of effeiciency)
@@ -46,12 +52,19 @@ void GridElement::partialReset() { //this makes that you can run multiple search
 
 void GridElement::draw() {
 	// draw background if visited
-	//if (visited) {
-	//	ofSetColor(145, 187, 255);
-	//	ofFill();
-	//	//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
-	//	ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.5)*GRID_ELEMENT_HEIGHT, (z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.33));
-	//}
+	if (visited) {
+		ofSetColor(145, 187, 255);
+		ofFill();
+		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
+		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, (z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.01));
+	}
+
+	if (bfs) {
+		ofSetColor(255,152,0); //orange
+		ofFill();
+		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
+		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, (z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.015));
+	}
 
 
 	// draw circle if marked

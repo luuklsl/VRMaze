@@ -19,8 +19,8 @@ void ofApp::setup(){
 		ofSetWindowShape(bounds.width, bounds.height);
 	}
 	
-	cam.setPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
-	wall1.loadImage("wall.bmp");
+	cam.setPosition((0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT));
+	//wall1.loadImage("wall.bmp");
 	//wall1.getTextureReference().bind();
 	cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 
@@ -31,11 +31,11 @@ void ofApp::setup(){
 	maze = true;
 	while (maze)
 	{
-		grid.reset();
+	grid.reset();
 	grid.generateMaze();
 	maze = grid.aStarCheck();
 	}
-	
+	grid.grid[0][0][0].human = true; //initializes the human player
 }
 
 //--------------------------------------------------------------
@@ -53,25 +53,26 @@ void ofApp::draw(){
 	ofEnableDepthTest();
 
 	// draw left eye first
-	cv1.begin(ovrEye_Left);
-	ofClear(0, 255, 255);
-	drawScene();
-	cv1.end(ovrEye_Left);
+	//cv1.begin(ovrEye_Left);
+	//ofClear(0, 255, 255);
+	//drawScene();
+	//cv1.end(ovrEye_Left);
 
-	// then right eye
-	// fyi--the order is critical!
-	cv1.begin(ovrEye_Right);
-	ofClear(0, 255, 255);
-	drawScene();
-	cv1.end(ovrEye_Right);
+	//// then right eye
+	//// fyi--the order is critical!
+	//cv1.begin(ovrEye_Right);
+	//ofClear(0, 255, 255);
+	//drawScene();
+	//cv1.end(ovrEye_Right);
 
-	// display the stereo view in the OF window (optional)
-	cv1.draw(0, 0);
+	//// display the stereo view in the OF window (optional)
+	//cv1.draw(0, 0);
+	drawScene();
 }
 
 //----------------------------------------------------------
 void ofApp::drawScene() {
-	//cam.begin(); //<<--look into exact use of this 
+	cam.begin(); //<<--look into exact use of this 
 
 	/*ofSeedRandom(666);
 
@@ -94,12 +95,12 @@ void ofApp::drawScene() {
 		ofDrawBox(0.5);
 		ofPopMatrix();
 	}*/
-	ofTranslate(/*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2, /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/0, /*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2);
+	//ofTranslate(/*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2, /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/0, /*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2);
 	grid.draw();
 
 	ofDrawAxis(5000);
 	
-	//cam.end();
+	cam.end();
 }
 
 //--------------------------------------------------------------
@@ -144,6 +145,7 @@ void ofApp::keyReleased(int key){
 			grid.reset();
 			grid.generateMaze();
 			maze = grid.aStarCheck();
+			grid.grid[0][0][0].human = true; //resets the human player
 		}
 		break;
 	/*case 'f':
