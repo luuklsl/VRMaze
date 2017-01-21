@@ -43,26 +43,26 @@ void Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
 		GridElement *current_element = queue.top();		//we get the current elem ([0][0]
 		queue.pop();
 
-		//current_element->visited = true;				//set to true
 		current_element->finally_checked = true;
 
-		int x = current_element->x;						//try to get x and y values 
-		int y = current_element->y;
-		int z = current_element->z;
-		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
+		if (current_element->x == human_elem->x
+			&& current_element->y == human_elem->y
+			&& current_element->z == human_elem->z)
 		{
 			std::cout << "A*	|	" << n_visited << "	|	" << current_element->length_of_path + 1 << "	|	" <<
 				((current_element->length_of_path + 1) / (double)n_visited) << std::endl;// << z << std::endl;
-			while (current_element->parent != NULL)
-			{
-				current_element->marked = true;
-				current_element = current_element->parent;
+			if (current_element->parent != NULL) {
+				while (current_element->parent->parent != NULL)
+				{
+					current_element->marked = true;
+					current_element = current_element->parent;
+				}
+				/*std::cout << "do we get here?" << std::endl;*/
+				current_element->astar = true;
+				current_element->parent->astar = false;
 			}
-			current_element->marked = true;
 			return;
 		}
-
-		int n_unvisited_directions = 0;	//does this even do what I want?
 
 		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
 			if (current_element->neighbours[direction] != NULL

@@ -37,20 +37,23 @@ void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 		queue.pop();
 		current_element->visited = true;				//set to true
 		n_visited++;
-		int x = current_element->x;						//try to get x and y values 
-		int y = current_element->y;
-		int z = current_element->z;
-		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
+		if (current_element->x == human_elem->x
+			&& current_element->y == human_elem->y
+			&& current_element->z == human_elem->z)
 		{
 			//add element with shortes Manhattan distance
 			std::cout << "Greedy	|	" << n_visited << "	|	" << current_element->length_of_path+1 << "	|	" <<
 				((current_element->length_of_path+1) / (double)n_visited) << std::endl;// << z << std::endl;
-			while (current_element->parent != NULL)
-			{
-				current_element->marked = true;
-				current_element = current_element->parent;
+			if (current_element->parent != NULL) {
+				while (current_element->parent->parent != NULL)
+				{
+					current_element->marked = true;
+					current_element = current_element->parent;
+				}
+				/*std::cout << "do we get here?" << std::endl;*/
+				current_element->bfs = true;
+				current_element->parent->bfs = false;
 			}
-			current_element->marked = true;
 			return;
 		}
 

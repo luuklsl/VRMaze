@@ -22,7 +22,7 @@ void ofApp::setup(){
 	cam.setPosition((0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT));
 	//wall1.loadImage("wall.bmp");
 	//wall1.getTextureReference().bind();
-	cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
+	//cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 
 	std::srand((unsigned int)std::time(0));
 	ofSetVerticalSync(false);

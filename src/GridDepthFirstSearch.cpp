@@ -29,19 +29,18 @@ void Grid::depthFirstSearch(GridElement * dfs_elem, GridElement * human_elem) {
 		GridElement *current_element = stack.top();		//we get the current elem ([0][0]
 		current_element->visited = true;				//set to true
 
-		int x = current_element->x;						//try to get x and y values (not yet working correctly)
-		int y = current_element->y;
-		int z = current_element->z;
-		if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
+		if (current_element->x == human_elem->x
+			&& current_element->y == human_elem->y
+			&& current_element->z == human_elem->z)
 		{
-			//add o
-			//int z = stack.size();
-			if (x == human_elem->x && y == human_elem->y && z == human_elem->z)
-				while (!stack.empty())
+				while (!(stack.size()-2 <= 0))
 			{
 				stack.top()->marked = true;
 				stack.pop();
 			}
+				stack.top()->dfs = true;
+				stack.pop();
+				stack.top()->dfs = false;
 			return;
 		}
 

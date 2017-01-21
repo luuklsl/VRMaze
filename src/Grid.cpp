@@ -48,6 +48,10 @@ void Grid::reset() {
 			}
 		}
 	}
+	astar_elem = nullptr;
+	greedy_elem = nullptr;
+	dfs_elem = nullptr;
+	bfs_elem = nullptr;
 }
 
 
@@ -107,17 +111,17 @@ void Grid::gridEnemy() {
 			}
 			e++;	// Advance the pointer by one
 		}
-	if (bfs_elem == NULL)
+	if (dfs_elem == NULL)
 	{
-		bfs_elem = &grid[2][2][2];
+		dfs_elem = &grid[2][2][2];
 	}
 	//if (human_elem == NULL)
 	//{
 	//	human_elem = &grid[0][0][0];
 	//}
-	if (bfs_elem == human_elem)
+	if (dfs_elem == human_elem)
 	{
 		std::cout << "You died" << std::endl;
 	}
-		breadthFirstSearch(bfs_elem,human_elem);	
+		depthFirstSearch(dfs_elem,human_elem);	
 	}

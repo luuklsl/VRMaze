@@ -19,7 +19,7 @@
 #define GRID_ELEMENT_WIDTH  ((float)WINDOW_HEIGHT  / GRID_SIZE)//Might be in need of Change
 #define GRID_ELEMENT_HEIGHT ((float)WINDOW_HEIGHT / GRID_SIZE)
 
-#define N_WALLS_TO_BE_REMOVED 220
+#define N_WALLS_TO_BE_REMOVED 300
 
 
 #endif /* config_h */

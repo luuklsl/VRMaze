@@ -24,14 +24,14 @@ void Grid::breadthFirstSearch(GridElement * bfs_elem, GridElement * human_elem) 
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
 		GridElement *current_element = queue.front();		//we get the current elem ([0][0]
 		current_element->visited = true;				//set to true
-		if (current_element->x == human_elem->x 
-			&& current_element->y == human_elem->y 
+		if (current_element->x == human_elem->x
+			&& current_element->y == human_elem->y
 			&& current_element->z == human_elem->z)
 		{
 			//add all possible frontiers to queue
 			std::cout << "BFS	|	" << n_visited << "	|	" << current_element->length_of_path + 1 << "	|	" <<
 				((current_element->length_of_path + 1) / (double)n_visited) << std::endl;// << z << std::endl;
-			std::cout << bfs_elem->x <<bfs_elem->y << bfs_elem->z <<std::endl;
+			std::cout << bfs_elem->x << bfs_elem->y << bfs_elem->z << std::endl;
 			if (current_element->parent != NULL) {
 				while (current_element->parent->parent != NULL)
 				{
@@ -45,8 +45,6 @@ void Grid::breadthFirstSearch(GridElement * bfs_elem, GridElement * human_elem) 
 			return;
 		}
 
-		int n_unvisited_directions = 0;	//does this even do what I want?
-		//Direction unvisited_directions[N_DIRECTIONS]; //setup an array of possible directions
 		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
 			//for a queue we want to push all the elements that are on the 'frontier'
 			if (current_element->neighbours[direction] != NULL
@@ -75,26 +73,4 @@ void Grid::breadthFirstSearch(GridElement * bfs_elem, GridElement * human_elem) 
 
 	}
 	std::cout << "BFS	| No solution to be found. Are we Jailed?" << std::endl;
-	//
-	// USAGE
-	//
-	// - add element (of type GridElement *) to the end of the queue:
-	// queue.push(element)
-	//
-	// - remove element from the front of the queue: (note: this will crash the program if the queue is empty)
-	// queue.pop()
-	//
-	// - get element from the front of the queue: (note: this will crash the program if the queue is empty)
-	// queue.front()
-	//   example:
-	// GridElement *element = queue.front();
-	//
-	// - check if the queue is empty:
-	// queue.empty()
-	//   example:
-	// bool is_empty = queue.empty();
-	//
-	// for more information refer to the documentation:
-	// http://en.cppreference.com/w/cpp/container/queue
-	//
 }
