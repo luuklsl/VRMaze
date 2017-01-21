@@ -13,9 +13,6 @@
 #include "constants.h"
 
 
-// simple macro to compute the manhattan distance to the end
-// USAGE for a GridElement el: MANHATTAN_DISTANCE_TO_END(el)
-#define MANHATTAN_DISTANCE_TO_END(el) ((GRID_SIZE - 1) - el->x) + ((GRID_SIZE - 1) - el->y) + ((GRID_SIZE - 1) - el->z)
 
 class Grid {
 public:

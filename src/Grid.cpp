@@ -85,43 +85,43 @@ void Grid::gridEnemy() {
 	int human_visted = 0;
 	for (int x = 0; x < GRID_SIZE*GRID_SIZE*GRID_SIZE; x++) {
 
-			if (e->astar)
-			{
-				astar_elem = e;
-			}
-			if (e->greedy)
-			{
-				greedy_elem = e;
-
-			}if (e->dfs)
-			{
-				dfs_elem = e;
-
-			}if (e->bfs)
-			{
-				bfs_elem = e;
-			}
-			if (e->human)
-			{
-				human_elem = e;
-			}
-			if (e->visited_human)
-			{
-				human_visted++;
-			}
-			e++;	// Advance the pointer by one
+		if (e->astar)
+		{
+			astar_elem = e;
 		}
-	if (dfs_elem == NULL)
+		if (e->greedy)
+		{
+			greedy_elem = e;
+
+		}if (e->dfs)
+		{
+			dfs_elem = e;
+
+		}if (e->bfs)
+		{
+			bfs_elem = e;
+		}
+		if (e->human)
+		{
+			human_elem = e;
+		}
+		if (e->visited_human)
+		{
+			human_visted++;
+		}
+		e++;	// Advance the pointer by one
+	}
+	if (astar_elem == NULL)
 	{
-		dfs_elem = &grid[2][2][2];
+		astar_elem = &grid[2][2][2];
 	}
 	//if (human_elem == NULL)
 	//{
 	//	human_elem = &grid[0][0][0];
 	//}
-	if (dfs_elem == human_elem)
+	if (astar_elem == human_elem)
 	{
 		std::cout << "You died" << std::endl;
 	}
-		depthFirstSearch(dfs_elem,human_elem);	
-	}
+	aStarSearch(astar_elem, human_elem);
+}

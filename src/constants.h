@@ -19,7 +19,15 @@
 #define GRID_ELEMENT_WIDTH  ((float)WINDOW_HEIGHT  / GRID_SIZE)//Might be in need of Change
 #define GRID_ELEMENT_HEIGHT ((float)WINDOW_HEIGHT / GRID_SIZE)
 
+
+
 #define N_WALLS_TO_BE_REMOVED 300
+
+
+// simple macro to compute the manhattan distance to the end
+// USAGE for a GridElement el: MANHATTAN_DISTANCE_TO_END(el)
+#define MANHATTAN_DISTANCE_TO_END(el, h_el) ((abs((h_el->x) - el->x)) + abs(((h_el->y) - el->y)) + abs(((h_el->z) - el->z)))
+
 
 
 #endif /* config_h */

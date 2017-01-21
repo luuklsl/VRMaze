@@ -17,19 +17,28 @@
 // distance comparison class for priority queue
 class DistanceCompare {
 public:
-	bool operator()(GridElement const *a, GridElement const *b) const {
-		return MANHATTAN_DISTANCE_TO_END(a) > MANHATTAN_DISTANCE_TO_END(b);
+	bool operator()(GridElement const *a, GridElement const *b,GridElement const *h_el) const {
+		return MANHATTAN_DISTANCE_TO_END(a,h_el) > MANHATTAN_DISTANCE_TO_END(b,h_el);
 	}
 };
+
+class FScoreCompare {
+public:
+	bool operator()(GridElement const *a, GridElement const *b) const {
+		return a->score > b->score;
+	}
+};
+
 
 void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 	// priority queue which sorts elements based on its score (score is a member of GridElement)
 	// for greedy search, this score could be the manhattan distance (from the current element) to the end
-	PriorityQueue<GridElement *, DistanceCompare> queue; //creates a queue that already uses distancecompare
+	PriorityQueue<GridElement *, FScoreCompare> queue; //creates a queue that already uses distancecompare
 	if (greedy_elem == NULL) {
-		GridElement* greedy_elem = &grid[0][0][0];
+		greedy_elem = &grid[0][0][0];
 	}		//this is how we have to give the elem to queue due to mandist.
 	queue.push(greedy_elem);//current start
+
 	int n_visited = 0; //set in visited
 	queue.top()->length_of_path = 0;
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
@@ -41,7 +50,7 @@ void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 			&& current_element->y == human_elem->y
 			&& current_element->z == human_elem->z)
 		{
-			//add element with shortes Manhattan distance
+			//add element with shortest Manhattan distance
 			std::cout << "Greedy	|	" << n_visited << "	|	" << current_element->length_of_path+1 << "	|	" <<
 				((current_element->length_of_path+1) / (double)n_visited) << std::endl;// << z << std::endl;
 			if (current_element->parent != NULL) {
@@ -51,13 +60,12 @@ void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 					current_element = current_element->parent;
 				}
 				/*std::cout << "do we get here?" << std::endl;*/
-				current_element->bfs = true;
-				current_element->parent->bfs = false;
+				current_element->greedy = true;
+				current_element->parent->greedy = false;
 			}
 			return;
 		}
 
-		//int n_unvisited_directions = 0;	//does this even do what I want?
 
 		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
 			//for a queue we want to push all the elements that are on the 'frontier'
@@ -66,10 +74,10 @@ void Grid::greedySearch(GridElement* greedy_elem, GridElement* human_elem) {
 				&& current_element->walls[direction] != true)
 
 			{
-
 				//should push next elem on queue here
 				current_element->neighbours[direction]->parent = current_element; //set parent of neighbouring unvisited to current elem
 				current_element->neighbours[direction]->length_of_path = current_element->length_of_path + 1;
+				current_element->neighbours[direction]->score = MANHATTAN_DISTANCE_TO_END(current_element, human_elem);
 				queue.push(current_element->neighbours[direction]); //element that statisfies if-
 				//above way is easiest change without changing the GridElement Class;
 

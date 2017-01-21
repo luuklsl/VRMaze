@@ -34,6 +34,7 @@ bool Grid::aStarCheck() {
 	queue.push(element);//current_element start
 	int n_visited = 0;
 	queue.top()->length_of_path = 0;
+	human_elem = &grid[GRID_SIZE - 1][GRID_SIZE - 1][GRID_SIZE - 1];
 	while (!queue.empty()) {							//if queue is empty we haven't started yet (catch finish case)
 		GridElement *current_element = queue.top();		//we get the current elem ([0][0]
 		queue.pop();
@@ -68,13 +69,13 @@ bool Grid::aStarCheck() {
 
 				//check for shorter distance
 				if ((current_element->neighbours[direction]->visited = true) && (current_element->neighbours[direction]->score >(current_element->neighbours[direction]->length_of_path +
-					MANHATTAN_DISTANCE_TO_END(current_element->neighbours[direction]))) && current_element->finally_checked != true) {
+					MANHATTAN_DISTANCE_TO_END(current_element->neighbours[direction],human_elem))) && current_element->finally_checked != true) {
 					std::cout << "higher costs";
 					queue.erase(current_element->neighbours[direction]);		//update costs
 				}
 				//add to queue on given place
 				current_element->neighbours[direction]->score = current_element->neighbours[direction]->length_of_path +
-					MANHATTAN_DISTANCE_TO_END(current_element->neighbours[direction]);
+					MANHATTAN_DISTANCE_TO_END(current_element->neighbours[direction],human_elem);
 				current_element->neighbours[direction]->parent = current_element;
 				queue.push(current_element->neighbours[direction]);
 				n_visited++;
