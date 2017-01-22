@@ -80,6 +80,13 @@ void Grid::draw() {
 	}
 }
 
+void Grid::playerInput(int key_id) {
+	bool moved = true;
+	while (!moved) {
+		humanPlayer(human_elem, key_id);
+	}
+}
+
 void Grid::gridEnemy() {
 	GridElement* e = (GridElement*)grid; //e is apointer to the grid array of GridElements
 	int human_visted = 0;

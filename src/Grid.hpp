@@ -25,6 +25,9 @@ public:
 
 	bool aStarCheck();
 
+	void playerInput(int key_id);
+	void humanPlayer(GridElement* human_elem,int key_id);
+
 	void gridEnemy();
 
 	GridElement grid[GRID_SIZE][GRID_SIZE][GRID_SIZE];

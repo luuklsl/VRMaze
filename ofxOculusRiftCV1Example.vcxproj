@@ -171,7 +171,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="aStartCheck.cpp" />
+    <ClCompile Include="src\aStarCheck.cpp" />
     <ClCompile Include="src\Direction.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\GridAStarSearch.cpp" />
@@ -180,6 +180,7 @@
     <ClCompile Include="src\GridElement.cpp" />
     <ClCompile Include="src\GridGreedySearch.cpp" />
     <ClCompile Include="src\GridMazeGenerator.cpp" />
+    <ClCompile Include="src\humanPlayer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOculusRiftCV1\src\ofxOculusRiftCV1.cpp" />

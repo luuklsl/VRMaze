@@ -133,7 +133,10 @@
     <ClCompile Include="src\GridMazeGenerator.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="aStartCheck.cpp">
+    <ClCompile Include="src\humanPlayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\aStarCheck.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
