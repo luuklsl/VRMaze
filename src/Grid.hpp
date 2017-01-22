@@ -25,8 +25,8 @@ public:
 
 	bool aStarCheck();
 
-	void playerInput(int key_id);
-	void humanPlayer(GridElement* human_elem,int key_id);
+	bool playerInput(int key_id);
+	bool humanPlayer(GridElement* human_elem,int key_id);
 
 	void gridEnemy();
 

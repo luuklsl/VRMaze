@@ -2,12 +2,9 @@
 
 #include <iostream>
 
-void Grid::humanPlayer(GridElement* human_elem, int key_id)
+bool Grid::humanPlayer(GridElement* human_elem, int key_id)
 {
 	bool moved = false;
-	while (moved)
-	{
-
-	}
-
+	//check if move is valid, if so, switch the bool
+	return moved;
 }

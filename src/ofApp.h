@@ -23,19 +23,19 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-	/*ofCamera x;*/
 	ofxOculusRiftCV1 cv1;
 	//ofxOculusDK2 oculusRift;
-	ofImage wall1;
-	ofImage wall2;
-	ofImage floor;
-	ofImage roof;
+	//ofImage wall1;
+	//ofImage wall2;
+	//ofImage floor;
+	//ofImage roof;
 	Grid grid;
 	ofCamera cam;			//initialize a cam object (ofEasycam can access _most_ ofCamera and ofNode functions from the online documentation)
 	ofFpsCounter fps;		//fps counter object
+	bool turn;
 							//ofTrueTypeFont	verdana14;
 	int prevX;				//initialization of values used for continuous tracking of mousemovement for camera positioning
-	int prevY;				//these two should be able to be deleted with Oculus Implementation
+	int prevY;				//these two should be useless with Oculus Implementation, but useful for cam control on development
 	
 	bool maze;
 };

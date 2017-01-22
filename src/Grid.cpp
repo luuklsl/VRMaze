@@ -54,7 +54,6 @@ void Grid::reset() {
 	bfs_elem = nullptr;
 }
 
-
 void Grid::partialReset() {
 	for (int y = 0; y < GRID_SIZE; y++) {
 		for (int x = 0; x < GRID_SIZE; x++) {
@@ -80,11 +79,10 @@ void Grid::draw() {
 	}
 }
 
-void Grid::playerInput(int key_id) {
-	bool moved = true;
-	while (!moved) {
-		humanPlayer(human_elem, key_id);
-	}
+bool Grid::playerInput(int key_id) {
+	bool notmoved = false;
+	notmoved =	humanPlayer(human_elem, key_id);
+	return notmoved;
 }
 
 void Grid::gridEnemy() {

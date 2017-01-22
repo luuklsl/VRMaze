@@ -36,6 +36,7 @@ void ofApp::setup(){
 	maze = grid.aStarCheck();
 	}
 	grid.grid[0][0][0].human = true; //initializes the human player
+	turn = true;
 }
 
 //--------------------------------------------------------------
@@ -148,29 +149,26 @@ void ofApp::keyReleased(int key){
 			grid.grid[0][0][0].human = true; //resets the human player
 		}
 		break;
-	/*case 'f':
-		grid.partialreset();
-		grid.depthfirstsearch();
-		break;
-	case 'b':
-		grid.partialreset();
-		grid.breadthfirstsearch();
-		break;
-	case 'g':
-		grid.partialreset();
-		grid.greedysearch();
-		break;*/
-
-	case 't': //get better key assigned <<
-		grid.partialReset();
-		grid.gridEnemy();
-		break;
 	case 'r':
 		grid.partialReset();
 		break;
 	case 'y':
 		ofExit();
+		break;
+
 	}
+	if ( (!turn) && key == 't') {  //get better key assigned
+								   //lets the enemies run		
+		grid.partialReset();
+		grid.gridEnemy();
+		turn = !turn; //switch turn
+	}
+	if (turn && (key == 356 || key == 357 || key == 358 || key == 359)) //human turn keys = input;
+	{
+		turn = grid.playerInput(key);
+		std::cout << key << " " << turn << std::endl;
+	}
+	//left right up down: 356, 357, 358, 359
 }
 
 //--------------------------------------------------------------
