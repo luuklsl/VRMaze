@@ -22,7 +22,7 @@ void ofApp::setup(){
 	cam.setPosition((0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT), (0.5*GRID_ELEMENT_HEIGHT));
 	//wall1.loadImage("wall.bmp");
 	//wall1.getTextureReference().bind();
-	//cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
+	cv1.setGlobalPosition(0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT, 0.5*GRID_ELEMENT_HEIGHT);
 
 	std::srand((unsigned int)std::time(0));
 	ofSetVerticalSync(false);
@@ -44,6 +44,12 @@ void ofApp::update(){
 	std::stringstream strm; // every update we ''stream'' framerate
 	strm << "fps: " << ofGetFrameRate();
 	ofSetWindowTitle(strm.str());
+	if ((!turn)/* && key == 't'*/) {  //get better key assigned
+								  //lets the enemies run		
+		grid.partialReset();
+		grid.gridEnemy();
+		turn = !turn; //switch turn
+	}
 
 	cv1.update();
 }
@@ -54,26 +60,26 @@ void ofApp::draw(){
 	ofEnableDepthTest();
 
 	// draw left eye first
-	//cv1.begin(ovrEye_Left);
-	//ofClear(0, 255, 255);
-	//drawScene();
-	//cv1.end(ovrEye_Left);
-
-	//// then right eye
-	//// fyi--the order is critical!
-	//cv1.begin(ovrEye_Right);
-	//ofClear(0, 255, 255);
-	//drawScene();
-	//cv1.end(ovrEye_Right);
-
-	//// display the stereo view in the OF window (optional)
-	//cv1.draw(0, 0);
+	cv1.begin(ovrEye_Left);
+	ofClear(0, 255, 255);
 	drawScene();
+	cv1.end(ovrEye_Left);
+
+	// then right eye
+	// fyi--the order is critical!
+	cv1.begin(ovrEye_Right);
+	ofClear(0, 255, 255);
+	drawScene();
+	cv1.end(ovrEye_Right);
+
+	// display the stereo view in the OF window (optional)
+	cv1.draw(0, 0);
+	//drawScene();
 }
 
 //----------------------------------------------------------
 void ofApp::drawScene() {
-	cam.begin(); //<<--look into exact use of this 
+	//cam.begin(); //<<--look into exact use of this 
 
 	/*ofSeedRandom(666);
 
@@ -96,12 +102,13 @@ void ofApp::drawScene() {
 		ofDrawBox(0.5);
 		ofPopMatrix();
 	}*/
-	//ofTranslate(/*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2, /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/0, /*-GRID_SIZE**/-GRID_ELEMENT_HEIGHT/2);
+	GridElement* human_elem = grid.getHumanElement();
+	ofTranslate(/*-GRID_SIZE**/-((human_elem->x) *GRID_ELEMENT_HEIGHT+ GRID_ELEMENT_HEIGHT /2), /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/-(human_elem->y)*GRID_ELEMENT_HEIGHT, /*-GRID_SIZE**/(( human_elem->z) *GRID_ELEMENT_HEIGHT+ GRID_ELEMENT_HEIGHT/2));
 	grid.draw();
 
 	ofDrawAxis(5000);
-	
-	cam.end();
+	//std::cout <<cv1.getHMDOrientationMatrix()<<std::endl;
+	//cam.end();
 }
 
 //--------------------------------------------------------------
@@ -163,7 +170,7 @@ void ofApp::keyReleased(int key){
 		grid.gridEnemy();
 		turn = !turn; //switch turn
 	}
-	if (turn && (key == 356 || key == 357 || key == 358 || key == 359)) //human turn keys = input;
+	if (turn && (key== 'j' || key =='n'||key == 356 || key == 357 || key == 358 || key == 359)) //human turn keys = input;
 	{
 		turn = grid.playerInput(key);
 		std::cout << key << " " << turn << std::endl;

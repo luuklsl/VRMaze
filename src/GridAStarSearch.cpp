@@ -34,7 +34,7 @@ void Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
 	PriorityQueue<GridElement *, FScoreCompare> queue;
 
 	if (astar_elem == NULL) {
-		GridElement* astar_elem = &grid[0][0][0];
+		astar_elem = &grid[0][0][0];
 	}
 	queue.push(astar_elem);//current_element start
 	int n_visited = 0;

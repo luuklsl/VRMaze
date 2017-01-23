@@ -37,12 +37,28 @@ Grid::Grid() {
 	}
 }
 
+GridElement* Grid::getHumanElement()
+{	
+	GridElement* human_elem;
+	for (int x = 0; x < GRID_SIZE; x++) {
+		for (int y = 0; y < GRID_SIZE; y++) {
+			for (int z = 0; z < GRID_SIZE; z++)
+			{
+
+				if (grid[x][y][z].human == true) {
+					human_elem = &grid[x][y][z];
+				}
+			}
+		}
+	}
+	return human_elem;
+}
 
 
 void Grid::reset() {
 	// reset all elements
-	for (int y = 0; y < GRID_SIZE; y++) {
-		for (int x = 0; x < GRID_SIZE; x++) {
+	for (int x = 0; x < GRID_SIZE; x++) {
+		for (int y = 0; y < GRID_SIZE; y++) {
 			for (int z = 0; z < GRID_SIZE; z++) {
 				grid[x][y][z].reset();
 			}
@@ -80,14 +96,16 @@ void Grid::draw() {
 }
 
 bool Grid::playerInput(int key_id) {
-	bool notmoved = false;
-	notmoved =	humanPlayer(human_elem, key_id);
-	return notmoved;
-}
+	bool notmoved = true;
+	GridElement* human_elem = getHumanElement();
+		notmoved = humanPlayer(human_elem, key_id);
+		return notmoved;
+	}
+
 
 void Grid::gridEnemy() {
 	GridElement* e = (GridElement*)grid; //e is apointer to the grid array of GridElements
-	int human_visted = 0;
+	int n_human_visted = 0;
 	for (int x = 0; x < GRID_SIZE*GRID_SIZE*GRID_SIZE; x++) {
 
 		if (e->astar)
@@ -112,14 +130,14 @@ void Grid::gridEnemy() {
 		}
 		if (e->visited_human)
 		{
-			human_visted++;
+			n_human_visted++;
 		}
 		e++;	// Advance the pointer by one
 	}
-	if (astar_elem == NULL)
+	/*if (astar_elem == NULL)
 	{
 		astar_elem = &grid[2][2][2];
-	}
+	}*/
 	//if (human_elem == NULL)
 	//{
 	//	human_elem = &grid[0][0][0];
@@ -128,5 +146,6 @@ void Grid::gridEnemy() {
 	{
 		std::cout << "You died" << std::endl;
 	}
+	if (n_human_visted >= 4)
 	aStarSearch(astar_elem, human_elem);
 }

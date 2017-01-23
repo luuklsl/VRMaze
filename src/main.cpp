@@ -4,10 +4,10 @@
 //========================================================================
 int main( ){
 
-	//ofGLWindowSettings settings;
-	//settings.setGLVersion(3, 0);
-	//ofCreateWindow(settings); // <-------- setup the GL context	
-	ofSetupOpenGL(700, 700, OF_WINDOW);
+	ofGLWindowSettings settings;
+	settings.setGLVersion(3, 0);
+	ofCreateWindow(settings); // <-------- setup the GL context	
+	//ofSetupOpenGL(700, 700, OF_WINDOW);
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:

@@ -27,6 +27,7 @@ public:
 
 	bool playerInput(int key_id);
 	bool humanPlayer(GridElement* human_elem,int key_id);
+	GridElement* getHumanElement();
 
 	void gridEnemy();
 

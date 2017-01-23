@@ -12,8 +12,8 @@
 #define APP_VERSION_MAJOR   1
 #define APP_VERSION_MINOR   0
 
-#define WINDOW_WIDTH        700 //50
-#define WINDOW_HEIGHT       700 //50
+#define WINDOW_WIDTH        700 /50
+#define WINDOW_HEIGHT       700 /50
 #define GRID_SIZE           5
 
 #define GRID_ELEMENT_WIDTH  ((float)WINDOW_HEIGHT  / GRID_SIZE)//Might be in need of Change
@@ -21,7 +21,7 @@
 
 
 
-#define N_WALLS_TO_BE_REMOVED 300
+#define N_WALLS_TO_BE_REMOVED 220
 
 
 // simple macro to compute the manhattan distance to the end
