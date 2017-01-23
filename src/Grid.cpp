@@ -147,5 +147,5 @@ void Grid::gridEnemy() {
 		std::cout << "You died" << std::endl;
 	}
 	if (n_human_visted >= 4)
-	aStarSearch(astar_elem, human_elem);
+	depthFirstSearch(dfs_elem, human_elem);
 }
