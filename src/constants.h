@@ -21,7 +21,7 @@
 
 
 
-#define N_WALLS_TO_BE_REMOVED 220
+#define N_WALLS_TO_BE_REMOVED 175
 
 
 // simple macro to compute the manhattan distance to the end

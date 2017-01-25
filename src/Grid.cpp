@@ -135,7 +135,7 @@ int Grid::gridEnemy() {
 		e++;	// Advance the pointer by one
 	}
 	int q = 1;
-	if (n_human_visted >= 2)
+	if (n_human_visted >= 4)
 	q = aStarSearch(astar_elem, human_elem);
 	
 	if (q == 2)

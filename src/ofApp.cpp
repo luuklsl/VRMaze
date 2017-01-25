@@ -113,9 +113,10 @@ void ofApp::drawScene() {
 		ofSetColor(0);
 		ofDrawBitmapString("Welcome to the 3D VR Maze! ", -3, 5, -15);
 		ofDrawBitmapString("Your goal is to get to the exit located on the top floor", -3, 4, -15);
-		ofDrawBitmapString("An enemy will follow you after a few turns, try to get to the end as fast as possible", -3, 3, -15);
-		ofDrawBitmapString("Press 'M' to (re)generate a maze!", -3, 2, -15);
-		ofDrawBitmapString("This is your what your enemy looks like : ", -3, 1, -15);
+		ofDrawBitmapString("An enemy will follow you after a few turns, ", -3, 3, -15);
+		ofDrawBitmapString("try to get to the end as fast as possible", -3, 2.5, -15);
+		ofDrawBitmapString("Press 'M' to (re)generate a maze!", -3, 1.4, -15);
+		ofDrawBitmapString("This is your what your enemy looks like : ", -3, 0.9, -15);
 		ofSetColor(0, 115, 100); //dark teal
 		ofTranslate(0, 0, -10);
 		ofDrawBox((0, 0, 0, (GRID_ELEMENT_HEIGHT*0.15)));
