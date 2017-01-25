@@ -29,7 +29,7 @@ public:
 	bool humanPlayer(GridElement* human_elem,int key_id);
 	GridElement* getHumanElement();
 
-	void gridEnemy();
+	int gridEnemy();
 
 	GridElement grid[GRID_SIZE][GRID_SIZE][GRID_SIZE];
 
@@ -37,7 +37,7 @@ public:
 	void depthFirstSearch(GridElement* dfs_elem, GridElement* human_elem);
 	void breadthFirstSearch(GridElement* bfs_elem, GridElement* human_elem);
 	void greedySearch(GridElement* greedy_elem, GridElement* human_elem);
-	void aStarSearch(GridElement* astar_elem, GridElement* human_elem);
+	int aStarSearch(GridElement* astar_elem, GridElement* human_elem);
 	GridElement* astar_elem;
 	GridElement* greedy_elem;
 	GridElement* bfs_elem;

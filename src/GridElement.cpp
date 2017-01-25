@@ -52,15 +52,15 @@ void GridElement::partialReset() { //this makes that you can run multiple search
 
 void GridElement::draw() {
 	// draw background if visited
-	if (visited) {
-		ofSetColor(145, 187, 255);
-		ofFill();
-		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
-		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.01));
-	}
+	//if (visited) {
+	//	ofSetColor(145, 187, 255);
+	//	ofFill();
+	//	//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
+	//	ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.01));
+	//}
 
 	if (bfs) {
-		ofSetColor(255,152,0); //orange
+		ofSetColor(255, 152, 0); //orange
 		ofFill();
 		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
 		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.15));
@@ -69,16 +69,16 @@ void GridElement::draw() {
 		ofSetColor(0, 115, 100); //dark teal
 		ofFill();
 		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
-		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.15));
+		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.3)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.3));
 	}
 	if (greedy) {
-		ofSetColor(76,175,80); //Google Green
+		ofSetColor(76, 175, 80); //Google Green
 		ofFill();
 		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
 		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.15));
 	}
 	if (dfs) {
-		ofSetColor(175,180,43); //dark teal
+		ofSetColor(175, 180, 43); //dark teal
 		ofFill();
 		//ofDrawRectangle((x * GRID_ELEMENT_WIDTH), (y * GRID_ELEMENT_HEIGHT), GRID_ELEMENT_WIDTH / 2, GRID_ELEMENT_HEIGHT / 2);
 		ofDrawBox((x + 0.5)*GRID_ELEMENT_HEIGHT, (y + 0.1)*GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, (GRID_ELEMENT_HEIGHT*0.15));
@@ -97,45 +97,53 @@ void GridElement::draw() {
 	}
 
 	// draw circle if marked
-	if (marked) {
-		ofNoFill();
-		ofSetColor(249, 77, 42);
-		//ofDrawEllipse((x + 0.5) * GRID_ELEMENT_WIDTH, (y + 0.5) * GRID_ELEMENT_HEIGHT, GRID_ELEMENT_WIDTH * 0.95, GRID_ELEMENT_HEIGHT * 0.95);
-		ofDrawSphere((x + 0.5) * GRID_ELEMENT_HEIGHT, (y + 0.5) * GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT,GRID_ELEMENT_HEIGHT/2);
-		
-	}
+	//if (marked) {
+	//	ofNoFill();
+	//	ofSetColor(249, 77, 42);
+	//	//ofDrawEllipse((x + 0.5) * GRID_ELEMENT_WIDTH, (y + 0.5) * GRID_ELEMENT_HEIGHT, GRID_ELEMENT_WIDTH * 0.95, GRID_ELEMENT_HEIGHT * 0.95);
+	//	ofDrawSphere((x + 0.5) * GRID_ELEMENT_HEIGHT, (y + 0.5) * GRID_ELEMENT_HEIGHT, -(z + 0.5)*GRID_ELEMENT_HEIGHT, GRID_ELEMENT_HEIGHT / 2);
+
+	//}
 
 
 	// draw all walls
-	for (int direction = 0; direction < N_DIRECTIONS; direction++) {
-		if (walls[direction]) {
-			ofNoFill();
-			drawWall((Direction)direction);
+	if (x == (GRID_SIZE - 1) && y == (GRID_SIZE - 1) && z == (GRID_SIZE - 1)) {
+		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
+			if (walls[direction]) {
+				drawEndWall((Direction)direction);
+			}
 		}
 	}
-
+	else {
+		for (int direction = 0; direction < N_DIRECTIONS; direction++) {
+			if (walls[direction]) {
+				ofNoFill();
+				drawWall((Direction)direction);
+			}
+		}
+	}
 }
 
 void GridElement::drawWall(Direction direction) {
 	ofSetColor(0);
-	
+
 	ofFill();
 	switch (direction) {
 	case DirectionSouth:
 		//ofNoFill();
-		ofSetColor(255, 0, 0); //red		
+		ofSetColor(48, 63, 159); //blue
 		ofDrawBox( //x,y,z, width, height, depth
-			float((x+0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
-			float((y+0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
-			float(-(z) *GRID_ELEMENT_HEIGHT), //
+			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z)*GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
 			float(GRID_ELEMENT_HEIGHT),
 			float(0)
 		);
 		break;
-	
+
 	case DirectionNorth:
-		ofSetColor(255, 0, 255); //purple
+		ofSetColor(48, 63, 159); //purple
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -147,31 +155,31 @@ void GridElement::drawWall(Direction direction) {
 		break;
 
 	case DirectionEast:
-		ofSetColor(255, 255, 0); //yellow
+		ofSetColor(25, 32, 71); //yellow
 		//ofDrawLine((x + 1) * GRID_ELEMENT_WIDTH, y * GRID_ELEMENT_HEIGHT, z*GRID_ELEMENT_HEIGHT,(x + 1) * GRID_ELEMENT_WIDTH, (y + 1) * GRID_ELEMENT_HEIGHT, z *GRID_ELEMENT_HEIGHT);
 		ofDrawBox( //x,y,z, width, height, depth
-			float((x +1) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((x + 1) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
 			float(0),
 			float(GRID_ELEMENT_HEIGHT),
 			float(-GRID_ELEMENT_HEIGHT)
 		);
-		break;	
+		break;
 	case DirectionWest:
-		ofSetColor(0, 0, 255); //white
+		ofSetColor(25, 32, 71); //white
 		ofDrawBox( //x,y,z, width, height, depth
-			float((x) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((x)*GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
 			float(0),
 			float(GRID_ELEMENT_HEIGHT),
 			float(-GRID_ELEMENT_HEIGHT)
-		); 
+		);
 		break;
 
 	case DirectionUp:
-		ofSetColor(0, 0, 0); //black
+		ofSetColor(120, 195, 120); //black
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
 			float((y + 1) *GRID_ELEMENT_HEIGHT), //this is for all the directions
@@ -181,10 +189,87 @@ void GridElement::drawWall(Direction direction) {
 			float(-GRID_ELEMENT_HEIGHT));
 		break;
 	case DirectionDown:
-		ofSetColor(255, 200, 200); //pink
+		ofSetColor(139, 195, 120); //pink
 		ofDrawBox( //x,y,z, width, height, depth
 			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
-			float((y) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float((y)*GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
+			float(GRID_ELEMENT_HEIGHT),
+			float(0),
+			float(-GRID_ELEMENT_HEIGHT));
+		break;
+	}
+}
+
+void GridElement::drawEndWall(Direction direction) {
+	ofSetColor(0);
+
+	ofFill();
+	switch (direction) {
+	case DirectionSouth:
+		//ofNoFill();
+		ofSetColor(248, 187, 208); //blue
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z)*GRID_ELEMENT_HEIGHT), //
+			float(GRID_ELEMENT_HEIGHT),
+			float(GRID_ELEMENT_HEIGHT),
+			float(0)
+		);
+		break;
+
+	case DirectionNorth:
+		ofSetColor(248, 187, 208); //purple
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z + 1) *GRID_ELEMENT_HEIGHT), //
+			float(GRID_ELEMENT_HEIGHT),
+			float(GRID_ELEMENT_HEIGHT),
+			float(0)
+		);
+		break;
+
+	case DirectionEast:
+		ofSetColor(248, 187, 208); //yellow
+								//ofDrawLine((x + 1) * GRID_ELEMENT_WIDTH, y * GRID_ELEMENT_HEIGHT, z*GRID_ELEMENT_HEIGHT,(x + 1) * GRID_ELEMENT_WIDTH, (y + 1) * GRID_ELEMENT_HEIGHT, z *GRID_ELEMENT_HEIGHT);
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x + 1) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
+			float(0),
+			float(GRID_ELEMENT_HEIGHT),
+			float(-GRID_ELEMENT_HEIGHT)
+		);
+		break;
+	case DirectionWest:
+		ofSetColor(248, 187, 208); //white
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x)*GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 0.5) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
+			float(0),
+			float(GRID_ELEMENT_HEIGHT),
+			float(-GRID_ELEMENT_HEIGHT)
+		);
+		break;
+
+	case DirectionUp:
+		ofSetColor(194,24,91); //black
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y + 1) *GRID_ELEMENT_HEIGHT), //this is for all the directions
+			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
+			float(GRID_ELEMENT_HEIGHT),
+			float(0),
+			float(-GRID_ELEMENT_HEIGHT));
+		break;
+	case DirectionDown:
+		ofSetColor(139, 195, 120); //pink
+		ofDrawBox( //x,y,z, width, height, depth
+			float((x + 0.5) *GRID_ELEMENT_HEIGHT), //relative location based on coordinates
+			float((y)*GRID_ELEMENT_HEIGHT), //this is for all the directions
 			float(-(z + 0.5) *GRID_ELEMENT_HEIGHT), //
 			float(GRID_ELEMENT_HEIGHT),
 			float(0),

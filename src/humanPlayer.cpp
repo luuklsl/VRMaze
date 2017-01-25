@@ -57,7 +57,7 @@ bool Grid::humanPlayer(GridElement* human_elem, int key_id)
 			notmoved = false;
 		}
 		break;
-	case 'j': // up = up
+	case 45: // up = up
 		if (human_elem->neighbours[4] != NULL
 			&& !human_elem->walls[4])
 		{
@@ -68,7 +68,7 @@ bool Grid::humanPlayer(GridElement* human_elem, int key_id)
 			notmoved = false;
 		}
 		break;
-	case 'n': // downward = down
+	case 43: // downward = down
 		if (human_elem->neighbours[5] != NULL
 			&& !human_elem->walls[5])
 		{

@@ -25,7 +25,7 @@ public:
 };
 
 
-void Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
+int Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
 {
 
 	// priority queue which sorts elements based on its score (score is a member of GridElement)
@@ -60,8 +60,13 @@ void Grid::aStarSearch(GridElement * astar_elem, GridElement * human_elem)
 				/*std::cout << "do we get here?" << std::endl;*/
 				current_element->astar = true;
 				current_element->parent->astar = false;
+				
 			}
-			return;
+			if (current_element == human_elem)
+				{
+					return 2;
+				}
+			return 1;
 		}
 
 		for (int direction = 0; direction < N_DIRECTIONS; direction++) {

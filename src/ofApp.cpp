@@ -37,6 +37,8 @@ void ofApp::setup(){
 	}
 	grid.grid[0][0][0].human = true; //initializes the human player
 	turn = true;
+	game_state = 0;
+	//0 == begin, 1 == maze, 2 == dead, 3 == win
 }
 
 //--------------------------------------------------------------
@@ -44,10 +46,14 @@ void ofApp::update(){
 	std::stringstream strm; // every update we ''stream'' framerate
 	strm << "fps: " << ofGetFrameRate();
 	ofSetWindowTitle(strm.str());
-	if ((!turn)/* && key == 't'*/) {  //get better key assigned
+	if (game_state == 1 && (grid.grid[GRID_SIZE - 1][GRID_SIZE - 1][GRID_SIZE - 1].human == true))
+	{
+		game_state = 3;
+	}
+	if ((!turn && game_state==1)/* && key == 't'*/) {  //get better key assigned
 								  //lets the enemies run		
 		grid.partialReset();
-		grid.gridEnemy();
+		game_state = grid.gridEnemy();
 		turn = !turn; //switch turn
 	}
 
@@ -101,12 +107,43 @@ void ofApp::drawScene() {
 		ofTranslate(pos);
 		ofDrawBox(0.5);
 		ofPopMatrix();
-	}*/
-	GridElement* human_elem = grid.getHumanElement();
-	ofTranslate(/*-GRID_SIZE**/-((human_elem->x) *GRID_ELEMENT_HEIGHT+ GRID_ELEMENT_HEIGHT /2), /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/-(human_elem->y)*GRID_ELEMENT_HEIGHT, /*-GRID_SIZE**/(( human_elem->z) *GRID_ELEMENT_HEIGHT+ GRID_ELEMENT_HEIGHT/2));
-	grid.draw();
+	}*/\
+	if (game_state == 0)
+	{
+		ofSetColor(0);
+		ofDrawBitmapString("Welcome to the 3D VR Maze! ", -3, 5, -15);
+		ofDrawBitmapString("Your goal is to get to the exit located on the top floor", -3, 4, -15);
+		ofDrawBitmapString("An enemy will follow you after a few turns, try to get to the end as fast as possible", -3, 3, -15);
+		ofDrawBitmapString("Press 'M' to (re)generate a maze!", -3, 2, -15);
+		ofDrawBitmapString("This is your what your enemy looks like : ", -3, 1, -15);
+		ofSetColor(0, 115, 100); //dark teal
+		ofTranslate(0, 0, -10);
+		ofDrawBox((0, 0, 0, (GRID_ELEMENT_HEIGHT*0.15)));
+		
 
-	ofDrawAxis(5000);
+	}
+	else if (game_state == 1) {
+		GridElement* human_elem = grid.getHumanElement();
+		ofTranslate(/*-GRID_SIZE**/-((human_elem->x) *GRID_ELEMENT_HEIGHT + GRID_ELEMENT_HEIGHT / 2), /*-GRID_SIZE** GRID_ELEMENT_HEIGHT/2*/-(human_elem->y)*GRID_ELEMENT_HEIGHT, /*-GRID_SIZE**/((human_elem->z) *GRID_ELEMENT_HEIGHT + GRID_ELEMENT_HEIGHT / 2));
+		grid.draw();
+
+	}
+	else if (game_state == 2)
+	{
+		ofSetColor(0);
+			ofDrawBitmapString("You Died!", 0, 5, -10);
+			ofDrawBitmapString("You Died!", 0, 5, 10);
+			ofDrawBitmapString("You Died!", 10, 5, 0);
+			ofDrawBitmapString("You Died!", -10, 5, 0);
+	}
+	else if (game_state == 3)
+	{
+		ofSetColor(0);
+		ofDrawBitmapString("You WON!!!", 0, 3, -10);
+		ofDrawBitmapString("You WON!!!", 0, 3, 10);
+		ofDrawBitmapString("You WON!!!", 10, 3, 0);
+		ofDrawBitmapString("You WON!!!", -10, 3, 0);
+	}
 	//std::cout <<cv1.getHMDOrientationMatrix()<<std::endl;
 	//cam.end();
 }
@@ -154,28 +191,33 @@ void ofApp::keyReleased(int key){
 			grid.generateMaze();
 			maze = grid.aStarCheck();
 			grid.grid[0][0][0].human = true; //resets the human player
+			game_state = 1;
 		}
 		break;
-	case 'r':
+	/*case 'r':
 		grid.partialReset();
-		break;
+		break;*/
 	case 'y':
 		ofExit();
 		break;
 
 	}
-	if ( (!turn) && key == 't') {  //get better key assigned
-								   //lets the enemies run		
-		grid.partialReset();
-		grid.gridEnemy();
-		turn = !turn; //switch turn
-	}
-	if (turn && (key== 'j' || key =='n'||key == 356 || key == 357 || key == 358 || key == 359)) //human turn keys = input;
-	{
-		turn = grid.playerInput(key);
-		std::cout << key << " " << turn << std::endl;
+	if (game_state == 1) { //we should only be able to 
+		//if ((!turn) && key == 't') {  //get better key assigned
+		//							   //lets the enemies run		
+		//	grid.partialReset();
+		//	game_state = grid.gridEnemy();
+		//	turn = !turn; //switch turn
+		//}					//45 == - == up
+		if (turn && (key == 45 || key == 43 || key == 356 || key == 357 || key == 358 || key == 359)) //human turn keys = input;
+		{
+			turn = grid.playerInput(key);
+			std::cout << key << " " << turn << std::endl;
+		}
 	}
 	//left right up down: 356, 357, 358, 359
+	std::cout << key << " " << turn << std::endl;
+
 }
 
 //--------------------------------------------------------------

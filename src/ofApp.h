@@ -38,4 +38,5 @@ public:
 	int prevY;				//these two should be useless with Oculus Implementation, but useful for cam control on development
 	
 	bool maze;
+	int game_state;
 };

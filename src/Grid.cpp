@@ -103,7 +103,7 @@ bool Grid::playerInput(int key_id) {
 	}
 
 
-void Grid::gridEnemy() {
+int Grid::gridEnemy() {
 	GridElement* e = (GridElement*)grid; //e is apointer to the grid array of GridElements
 	int n_human_visted = 0;
 	for (int x = 0; x < GRID_SIZE*GRID_SIZE*GRID_SIZE; x++) {
@@ -134,18 +134,14 @@ void Grid::gridEnemy() {
 		}
 		e++;	// Advance the pointer by one
 	}
-	/*if (astar_elem == NULL)
-	{
-		astar_elem = &grid[2][2][2];
-	}*/
-	//if (human_elem == NULL)
-	//{
-	//	human_elem = &grid[0][0][0];
-	//}
-	if (astar_elem == human_elem)
+	int q = 1;
+	if (n_human_visted >= 2)
+	q = aStarSearch(astar_elem, human_elem);
+	
+	if (q == 2)
 	{
 		std::cout << "You died" << std::endl;
+		return 2;
 	}
-	if (n_human_visted >= 4)
-	depthFirstSearch(dfs_elem, human_elem);
+	return q;
 }

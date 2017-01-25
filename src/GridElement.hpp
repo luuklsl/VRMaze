@@ -20,6 +20,7 @@ public:
 
 	void draw();
 	void drawWall(Direction);
+	void drawEndWall(Direction);
 
 	void setWall(Direction, bool);
 
